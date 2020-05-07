@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" ng-app="ResortsApp">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script src="/js/app.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+
+  </head>
+  <body ng-controller="MainController as ctrl">
+
+        <h1>Resort Tracker</h1>
+
+    <ul>
+      <div class="card"
+      <li ng-repeat="resort in ctrl.resorts">
+    <span class="location">Location:</span>{{resort.location}}<br/>
+      <span class="mountain">Mountain:</span> {{resort.mountain}}<br/>
+      <a
+          href="#"
+          ng-if="$index !== ctrl.editFormShown"
+          ng-click="ctrl.editFormShown = $index">
+          Edit Resort
+       </a>
+
+        <form class="edit"
+        ng-if="$index === ctrl.editFormShown"
+        ng-submit="ctrl.editResorts(resort);">
+          <input type="text" ng-model="ctrl.updatedLocation" placeholder="Location" />
+          <input type="text" ng-model="ctrl.updatedMountain" placeholder="Mountain" />
+          <input type="submit" value="Update Resort"/>
+      </form>
+      <br/>
+      <button ng-click="ctrl.deleteResort(resort)">Delete Resort</button>
+      </li>
+    </ul>
+
+      <form class="create" ng-submit="ctrl.createResort()">
+        <input type="text" ng-model="ctrl.location" placeholder="location" />
+        <input type="text" ng-model="ctrl.mountain" placeholder="mountain" />
+        <input type="submit" value="Create Resort" />
+      </form>
+
+  </body>
+</html>
